@@ -34,11 +34,16 @@ while True:
 
     countors,hi = cv2.findContours(imgPre,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE )
 
+    # Contador de objetos
     for contorno in countors:
-        x,y,width,height = cv2.boundingRect(contorno)
+        area = cv2.contourArea(contorno)
 
-        cv2.rectangle(img,(x,y),(x + width, y + height,),(0, 255, 0),2)
+        # Reconhecendo o que são as moedas e o que não são
+        if area > 2000:
+            x,y,width,height = cv2.boundingRect(contorno)
+            cv2.rectangle(img,(x,y),(x + width, y + height,),(0, 255, 0),2)
 
+           
     cv2.imshow('IMG', img)
     cv2.imshow('IMG PRE-PROCESSADA', imgPre)
     
